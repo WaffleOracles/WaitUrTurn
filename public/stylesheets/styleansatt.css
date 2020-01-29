@@ -1,0 +1,65 @@
+body {
+    background-color: aqua;
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    height: 90%;
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.queuesection {
+    background-color: blue;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.queueitem {
+    margin-top: 40px;
+    height: 200px;
+    width: 90%;
+    background-color: orange;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.queueitemtext {
+    width: 40%;
+}
+
+.queueitembutton {
+    width: 40%;
+    background-color: green;
+    height: 50%;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+.itemtext {
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.infosection {
+    flex-grow: 1;
+    background-color: brown;
+}
+

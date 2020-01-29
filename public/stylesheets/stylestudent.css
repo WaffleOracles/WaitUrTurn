@@ -1,8 +1,54 @@
 body {
-  padding: 50px;
+  padding: 0 10% 10%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #30638e;
 }
 
 a {
   color: #00B7FF;
+}
+form{
+  width: 100%;
+}
+.title{
+  color: #d1495b;
+  background-color: #30638e;
+  width:100%;
+  font-size:6vw;
+  text-align: center;
+  box-shadow: 0px 0px 20px #003d5b;
+  margin-bottom: 10%;
+  margin-top:10%;
+}
+.index{
+  position: relative;
+  color: #edae49;
+  text-align: right;
+  font-size:3vw;
+  width: 100%;
+}
+
+.input{
+  width: 100%;
+  font-size: 150%;
+  color: #30638e;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 2%;
+  margin-bottom: 5%;
+  margin-top:1%;
+  box-shadow: 0px 0px 5px #003d5b;
+}
+
+.submitButton{
+  background-color: #d1495b;
+  border-radius: 100%;
+  font-size: 2em;
+  font-weight: bold;
+  border-width: 0px;
+  box-shadow: 0px 0px 10px #003d5b;
+  color: #edae49;
+  width: 3em;
+  height: 3em;
+
 }

@@ -23,83 +23,72 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function(req, res, next) {
-  res.render('student', { title: 'IO' });
+// get setup
+app.get('/', function (req, res, next) {
+    res.render('student', {title: 'IO'});
 });
 
-app.get('/waiting', function(req, res, next) {
-  var navn = req.query.navn;
-  var fag = req.query.fag;
-  var bordnummer = req.query.bordnummer;
+app.get('/waiting', function (req, res, next) {
+    var navn = req.query.navn;
+    var fag = req.query.fag;
+    var bordnummer = req.query.bordnummer;
 
-  queue.addQueueSlot(new QueueSlot(navn, fag, bordnummer));
-  queue.queueArray.forEach(slot => console.log(slot));
+    queue.addQueueSlot(new QueueSlot(navn, fag, bordnummer));
+    queue.queueArray.forEach(slot => console.log(slot));
 
-  var number = queue.getNumberInQueue();
-  var msg = 'Du er nummer ' + number + ' i køen.';
-  res.render('waiting', {message: msg});
+    var number = queue.getNumberInQueue();
+    var msg = 'Du er nummer ' + number + ' i køen.';
+    res.render('waiting', {message: msg});
 
 });
 
-app.get('/ansatt', function(req, res, next) {
-  res.render('ansatt');
+app.get('/ansatt', function (req, res, next) {
+    res.render('ansatt');
 });
-
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.use(function (req, res, next) {
+    next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 // Websockets
 var server = http.createServer(app);
-const wss = new websocket.Server({ server });
+const wss = new websocket.Server({server});
 var websocketConnections = {};
 var connectionID = 0;
 
 wss.on("connection", function connection(ws) {
-    
-  let connection = ws;
-  connection.id = connectionID++;
-  websocketConnections[connection.id]
 
-  connection.on("message", function incoming(message) {
-    
+    let connection = ws;
+    connection.id = connectionID++;
+    websocketConnections[connection.id]
 
-    if (message === "REQ QUEUE") {
-      // Send queue items to user here
-      console.log("Sending queue items")
+    connection.on("message", function incoming(message) {
 
-      queue.queueArray.forEach(slot => connection.send(JSON.stringify(slot)));
-    }
-  });
+
+        if (message === "REQ QUEUE") {
+            // Send queue items to user here
+            console.log("Sending queue items")
+
+            queue.queueArray.forEach(slot => connection.send(JSON.stringify(slot)));
+        }
+    });
 });
-
-
-
-
-
-
-
-
-
-
-
 
 
 server.listen(4000);

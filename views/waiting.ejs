@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Informatikkorakel kø</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/stylewaiting.css'/>
     <script src="./javascripts/scriptstudent.js"></script>
-  </head>
-  <body>
-    <h1>IO</h1>
-    
-    
-    <h1><%= message %></h1>
-    
+</head>
+<body>
+<div id="ticket">
+    <div id="container">
+        <div id="small"><h1>Du er nr:</h1></div>
+        <div id="main"><h1><%= message %></h1></div>
+        <div class="circle top left"></div>
+        <div class="circle top right"></div>
+        <div class="circle middle left"></div>
+        <div class="circle middle right"></div>
+        <div class="circle bottom left"></div>
+        <div class="circle bottom right"></div>
+    </div>
 
-    
-  </body>
+
+    <!--<div class="bottom left"></div>
+    <div class="bottom right"></div>-->
+</div>
+
+</body>
 </html>

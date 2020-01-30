@@ -40,7 +40,8 @@ app.get('/waiting', function (req, res, next) {
     queue.queueArray.forEach(slot => console.log(slot));
 
     var number = queue.getNumberInQueue();
-    var msg = 'Du er nummer ' + number + ' i køen.';
+    //var msg = 'Du er nummer ' + number + ' i køen.';
+    var msg = number;
     res.render('waiting', {message: msg});
 
 });

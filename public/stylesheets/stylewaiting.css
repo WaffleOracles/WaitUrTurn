@@ -1,0 +1,85 @@
+body {
+    /*padding: 0 10% 10%;*/
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: #d1495b;
+}
+/* ticket*/
+#ticket{
+    margin: 10vh; /* here */
+    margin-bottom: 6vw; /* here */
+    max-height: 88vh; /* here */
+}
+
+/* main */
+
+#main {
+    margin: auto;
+    max-width: 75vmin; /* here */
+    max-height: 100vmin; /* here */
+    background-color: #003d5b;
+    position: relative;
+
+}
+
+
+#main h1{
+    text-align: center;
+    position: static;
+    color: #edae49;
+    padding-top: 15vmin; /* here */
+    padding-bottom: 15vmin; /* here */
+    font-size: 20vmin; /* here */
+    margin: 0px;
+}
+.circle {
+    position: absolute;
+    width: 20vmin;
+    height: 20vmin;
+    border-radius: 100%;
+    background-color: #d1495b;
+}
+.circle.middle{
+    width: 15vmin;
+    height: 15vmin;
+}
+#container{
+    position: relative;
+    max-width: 75vmin;
+}
+
+.top { top: -10vmin } /* here */
+.left { left: -10vmin } /* here */
+.right { right: -10vmin; } /* here */
+.bottom{ bottom: -10vmin; } /* here */
+.middle { top: 16vmin; }
+
+/* small */
+
+#small{
+    margin: auto;
+    max-width: 75vmin; /* here */
+    max-height: 100vmin; /* here */
+    background-color: #003d5b;
+    position: relative;
+    border-bottom: #edae49 dashed;
+}
+#small h1{
+    text-align: center;
+    /*position: absolute;*/
+    color: #edae49;
+    position: static;
+    padding-top: 7vmin; /* here */
+    padding-bottom: 7vmin; /* here */
+    font-size: 7vmin; /* here */
+    margin: 0px;
+}
+
+#small div{
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    border-radius: 100%;
+    background-color: #d1495b;
+}
+
+

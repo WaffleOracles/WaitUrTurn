@@ -42,16 +42,21 @@ body {
     width: 15vmin;
     height: 15vmin;
 }
+.circle.top{
+    width: 17vmin;
+    height: 17vmin;
+}
 #container{
     position: relative;
     max-width: 75vmin;
+    margin: auto;
 }
 
 .top { top: -10vmin } /* here */
 .left { left: -10vmin } /* here */
 .right { right: -10vmin; } /* here */
 .bottom{ bottom: -10vmin; } /* here */
-.middle { top: 16vmin; }
+.middle { top: 15vmin; }
 
 /* small */
 

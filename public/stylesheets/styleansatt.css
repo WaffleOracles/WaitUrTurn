@@ -14,7 +14,7 @@ body {
     align-content: center;
 }
 
-.queuesection {
+.queueSection {
     background-color: blue;
     flex-grow: 1;
     display: flex;
@@ -24,7 +24,7 @@ body {
     align-items: center;
 }
 
-.queueitem {
+.queueItem {
     margin-top: 40px;
     height: 200px;
     width: 90%;
@@ -36,29 +36,24 @@ body {
     align-items: center;
 }
 
-.queueitemtext {
+.queueItemText {
     width: 40%;
 }
 
-.queueitembutton {
+.queueItemButton {
     width: 40%;
     background-color: green;
     height: 50%;
     vertical-align: middle;
 }
 
-
-
-
-
-
-.itemtext {
+.itemText {
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
 }
 
 
-.infosection {
+.serving {
     flex-grow: 1;
     background-color: brown;
 }

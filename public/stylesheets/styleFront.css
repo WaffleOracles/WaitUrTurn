@@ -1,0 +1,42 @@
+body{
+    color: #edae49;
+    background-color: #003d5b;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.question, .waffle{
+    width: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.button{
+    width: 50vh;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d1495b;
+    box-shadow: inset 0px 1px 20px 20px #eeae49;
+    border-radius: 100%;
+    border: 2vmin solid #d1495b;
+}
+
+.text{
+    font-weight: bolder;
+    font-size: 35vmin;
+    text-shadow: 10px 10px 20px #003d5b;
+}
+

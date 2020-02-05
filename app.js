@@ -28,8 +28,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // get setup
 app.get('/', function (req, res, next) {
+    res.render('front');
+});
+
+app.get('/student', function (req, res, next) {
     res.render('student', {title: 'IO'});
 });
+
 
 app.get('/waiting', function (req, res, next) {
     var navn = req.query.navn;

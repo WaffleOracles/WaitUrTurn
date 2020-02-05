@@ -7,28 +7,32 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/styleansatt.css">
   </head>
   <body>
-    <h1 style="margin-bottom: 50px;">IO - Ansatt</h1>
+    <h1 id="title" style="margin-bottom: 50px;">IO - ANSATT</h1>
 
     <div class="container">
-
-
         <div class="queueSection">
-
-          <h1 style="font-family: 'Roboto', sans-serif; font-size: 40px;">Kø</h1>
-
-          <div id = "0" class="queueItem">
-            <div class="queueItemText">
-              <p class="itemText">Navn: Vetle</p>
-              <p class="itemText">Fag: INF140</p>
-              <p class="itemText">Bord nummer: 9</p>
-            </div>
-            <div onclick = 'acceptRequest(this)' class="queueItemButton">
-              <p class="itemText">Accept</p>
+          <div class="title"> <h1 style="font-family: 'Roboto', sans-serif; font-size: 40px;">Kø</h1></div>
+          <div class="waitingQueue">
+            <div id = "0" class="queueItem">
+              <div class="queueItemText">
+                <p class="itemText">Navn: Vetle</p>
+                <p class="itemText">Fag: INF140</p>
+                <p class="itemText">Bord nummer: 9</p>
+              </div>
+              <div onclick = 'acceptRequest(this)' class="queueItemButton">
+                <p class="itemText">Accept</p>
+              </div>
             </div>
           </div>
+
         </div>
         <div class="serving">
-          <h1 style="font-family: 'Roboto', sans-serif; font-size: 40px;">Serving</h1>
+          <div class="title">
+            <h1 style="font-family: 'Roboto', sans-serif; font-size: 40px;">Serving</h1>
+          </div>
+          <div class="servingQueue">
+
+          </div>
         </div>
 
 

@@ -66,17 +66,18 @@ function processSlotFromServer(data) {
   let queueItem = createQueueItem(queueSlot, nrQueueItems++);
 
   // Finally add the new element to the queue section
-  let queueSection = document.getElementsByClassName('queueSection');
+  let queueSection = document.getElementsByClassName('waitingQueue');
   queueSection[0].appendChild(queueItem);
 }
 
 function acceptRequest(id){
   //console.clear();
   let next = id.parentElement;
-  let serving = document.getElementsByClassName('serving')[0];
+  let serving = document.getElementsByClassName('servingQueue')[0];
   serving.appendChild(next);
   next.children[1].children[0].innerHTML = 'Done';
   next.children[1].setAttribute('onclick','doneRequest(this)')
+  //next.appendChild(next.children[0])
 }
 
 function doneRequest(id) {

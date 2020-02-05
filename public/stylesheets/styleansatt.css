@@ -1,60 +1,137 @@
 body {
-    background-color: aqua;
+    background-color: #fff;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .container {
     width: 100%;
     height: 90%;
-    background-color: red;
+    background-color: #00798c;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
+    color: #edae49;
 }
 
-.queueSection {
-    background-color: blue;
-    flex-grow: 1;
+#title {
+    color: #003d5b;
+}
+
+.queueSection{
+    background-color: #d1495b;
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+    color: #edae49;
+}
+.serving{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: #003d5b;
+    color: #edae49;
 }
 
-.queueItem {
+
+.queueSection .queueItem {
     margin-top: 40px;
-    height: 200px;
+    height: 20vh;
+    min-height: 150px;
     width: 90%;
-    background-color: orange;
+    background-color: #003d5b;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    /*box-shadow: 18px 20px 20px #003d5b;*/
+
+}
+
+.waitingQueue {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-content: flex-start;
+
+}
+
+.servingQueue {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-content: flex-end;
+}
+
+.title {
+    height: 10vh;
+}
+
+.serving .queueItem {
+    margin-top: 40px;
+    height: 20vh;
+    min-height: 150px;
+    width: 90%;
+    background-color: #d1495b;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    /*box-shadow: 18px 20px 20px #003d5b;*/
+
 }
 
 .queueItemText {
-    width: 40%;
+    width: 50%;
+    text-align: start;
+}
+
+.serving .queueItemText {
+    width: 50%;
+    text-align: start;
 }
 
 .queueItemButton {
-    width: 40%;
-    background-color: green;
-    height: 50%;
+    width: 35%;
+    color: #003d5b;
+    background-color: #edae49;
+    height: 35%;
     vertical-align: middle;
+    border-radius: 10px;
+    font-weight: bolder;
+    text-align: center;
+    font-size: larger;
+}
+
+.queueSection .queueItemButton {
+    box-shadow: 1px 4px 5px #d1495b;
+}
+
+.serving .queueItemButton {
+    box-shadow: 1px 4px 5px #003d5b;
 }
 
 .itemText {
-    font-size: 20px;
+    font-size: 2.6vmin;
     font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
 }
 
 
-.serving {
-    flex-grow: 1;
-    background-color: brown;
+
+
+.buttontext {
+    font-size: xx-large;
+    text-shadow: 1px 1px #003d5b;
 }
 

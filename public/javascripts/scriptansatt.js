@@ -7,7 +7,6 @@ function QueueSlot(navnIn, fagIn, bordNummerIn) {
 }
 
 var queue = [];
-var serving = [];
 nrQueueItems = 0;
 
 window.onload = function() {

@@ -40,16 +40,24 @@ app.get('/waiting', function (req, res, next) {
     var navn = req.query.navn;
     var fag = req.query.fag;
     var bordnummer = req.query.bordnummer;
-
-    queue.addQueueSlot(new QueueSlot(navn, fag, bordnummer));
-    queue.queueArray.forEach(slot => console.log(slot));
-
-    var number = queue.getNumberInQueue();
-    //var msg = 'Du er nummer ' + number + ' i køen.';
-    var msg = number;
-    res.render('waiting', {message: msg});
+    let newSlot = new QueueSlot(navn, fag, bordnummer)
+    if (!alreadyInQueue(newSlot)){
+        queue.addQueueSlot(newSlot);
+        queue.queueArray.forEach(slot => console.log(slot));
+    }
+        var number = queue.getNumberInQueue();
+        //var msg = 'Du er nummer ' + number + ' i køen.';
+        var msg = number;
+        res.render('waiting', {message: msg});
 
 });
+
+function alreadyInQueue(queueSlot){
+    for (let a = 0; a<queue.getNumberInQueue(); a++){
+        if (queue.getSlot(a).equals(queueSlot)) return true;
+    }
+    return false;
+}
 
 app.get('/ansatt', function (req, res, next) {
     res.render('ansatt');

@@ -10,3 +10,21 @@ function addToQueue() {
 };
 
 
+function mouseOver(id) {
+    id.style.backgroundColor =  "#edae49";
+    id.style.color ='#d1495b';
+}
+
+function mouseLeave(id) {
+    id.style.backgroundColor =  "#d1495b";
+    id.style.color ='#edae49';
+}
+function mouseDown(id) {
+    id.style.backgroundColor =  "#edae49";
+    id.style.color ='#d1495b';
+    id.style.boxShadow = "inset 0px 0px 10px 3px #d1495b";
+}
+function mouseUp(id) {
+    id.style.boxShadow = "inset 0px 0px 0px 0px #d1495b";
+}
+

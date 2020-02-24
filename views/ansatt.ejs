@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Informatikkorakel ansatt</title>
     <script src="./javascripts/scriptansatt.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/stylesheets/styleansatt.css">
-  </head>
-  <body>
-    <h1 id="title" style="margin-bottom: 50px;">IO - ANSATT</h1>
+</head>
+<body>
+<h1 id="title" style="margin-bottom: 50px;">ANSATT</h1>
 
-    <div class="container">
-        <div class="queueSection">
-          <div class="title"> <h1 style="font-family: 'Roboto', sans-serif; font-size: 40px;">Kø</h1></div>
-          <div class="waitingQueue">
-            <div id = "0" class="queueItem">
-              <div class="queueItemText">
-                <p class="itemText">Navn: Vetle</p>
-                <p class="itemText">Fag: INF140</p>
-                <p class="itemText">Bord nummer: 9</p>
-              </div>
-              <div onclick = 'acceptRequest(this)' class="queueItemButton">
-                <p class="itemText">Accept</p>
-              </div>
+<div class="container">
+    <div class="queueSection">
+        <div class="title"><h1 style="font-family: 'Roboto', sans-serif; font-size: 40px;">WAITING</h1></div>
+        <div class="waitingQueue">
+            <div id="0" class="queueItem">
+                <div class="queueItemText">
+                    <p class="itemText">Navn: Vetle</p>
+                    <p class="itemText">Fag: INF140</p>
+                    <p class="itemText">Bord nummer: 9</p>
+                </div>
+                <div class="buttons">
+                    <div onclick='acceptRequest(this)' class="queueItemButton">
+                        <p class="buttonText">Accept</p>
+                    </div>
+                    <div onclick='deleteRequest(this)' class="queueItemButton">
+                        <p class="buttonText">Delete</p>
+                    </div>
+                </div>
             </div>
-          </div>
-
         </div>
-        <div class="serving">
-          <div class="title">
-            <h1 style="font-family: 'Roboto', sans-serif; font-size: 40px;">Serving</h1>
-          </div>
-          <div class="servingQueue">
-
-          </div>
-        </div>
-
 
     </div>
-    
-    
-  </body>
+    <div class="serving">
+        <div class="title">
+            <h1 style="font-family: 'Roboto', sans-serif; font-size: 40px;">SERVING</h1>
+        </div>
+        <div class="servingQueue">
+
+        </div>
+    </div>
+</div>
+
+
+</body>
 </html>

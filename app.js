@@ -3,13 +3,15 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var Queue = require('./queue')
-var QueueSlot = require('./queueSlot')
+var QueueSlot = require('./queueSlot');
 var websocket = require("ws");
 var http = require("http");
 
 
 var app = express();
 var queue = new Queue();
+var serving = new Queue();
+var done = new Queue();
 
 // Add example queue sloits here for testing
 queue.addQueueSlot(new QueueSlot('Vetle', 'Inf140', '7'));
@@ -31,38 +33,91 @@ app.get('/', function (req, res, next) {
     res.render('front');
 });
 
+function getCookie(name, cookie) {
+    var regexp = new RegExp("(?:^" + name + "|;\\s*" + name + ")=(.*?)(?:;|$)", "g");
+    var result = regexp.exec(cookie);
+    return (result === null) ? null : result[1];
+}
+
 app.get('/student', function (req, res, next) {
-    res.render('student', {title: 'IO'});
+
+    let cookie = req.header("cookie");
+    let slot = new QueueSlot(getCookie("navn", cookie), getCookie("fag", cookie), getCookie("bord", cookie));
+    let date = new Date(getCookie("expires", cookie));
+
+    // check if the cookie is expired, meaning slot is served or deleted
+    // or check if user does not have a slot waiting or being served
+    if (date < Date.now() || queue.get(slot) < 0 || serving.get(slot)<0)
+        res.render('student', {title: 'IO'});
+    else {
+        if(queue.get(slot)>=0)
+            res.render('waiting', {message: queue.get(slot) + 1});
+        else res.render('waiting', {message: 0});
+    }
 });
 
 
 app.get('/waiting', function (req, res, next) {
-    var navn = req.query.navn;
-    var fag = req.query.fag;
-    var bordnummer = req.query.bordnummer;
-    let newSlot = new QueueSlot(navn, fag, bordnummer)
-    if (!alreadyInQueue(newSlot)){
-        queue.addQueueSlot(newSlot);
+    let cookie = req.header("cookie");
+    let slot = new QueueSlot(getCookie("navn", cookie), getCookie("fag", cookie), getCookie("bord", cookie));
+    let date = new Date(getCookie("expires", cookie));
+    if(date<Date.now()){
+        // expired cookie, return start page
+        res.render('front');
+    }else if (done.get(slot)>=0){
+        res.render('front');
+    }else if(queue.get(slot)>=0){
+        // if in queue
+        res.render('waiting', {message: queue.get(slot) + 1});
+    }else if(serving.get(slot)>=0){
+        // if being served
+        res.render('waiting', {message: 0});
+    }else {
+        // if cookie is not expired (student must set cookie before requesting wait page)
+        // add to queue
+        queue.addQueueSlot(slot);
         queue.queueArray.forEach(slot => console.log(slot));
+        res.render('waiting', {message: queue.get(slot) + 1});
     }
-        var number = queue.getNumberInQueue();
-        //var msg = 'Du er nummer ' + number + ' i køen.';
-        var msg = number;
-        res.render('waiting', {message: msg});
 
 });
-
-function alreadyInQueue(queueSlot){
-    for (let a = 0; a<queue.getNumberInQueue(); a++){
-        if (queue.getSlot(a).equals(queueSlot)) return true;
-    }
-    return false;
-}
 
 app.get('/ansatt', function (req, res, next) {
     res.render('ansatt');
 });
 
+app.post('/done', function (req, res) {
+    slotToRemove = req.header("removeSlot");
+    let slot = new QueueSlot(getCookie("navn", slotToRemove), getCookie("fag", slotToRemove), getCookie("bord", slotToRemove));
+    if(serving.get(slot)>=0){
+        serving.remove(slot);
+        done.addQueueSlot(slot);
+    }
+    res.send("registered done with request!");
+});
+
+app.post('/delete', function(req,res){
+    slotToDelete = req.header("deleteSlot");
+    let slot = new QueueSlot(getCookie("navn", slotToDelete), getCookie("fag", slotToDelete), getCookie("bord", slotToDelete));
+    if(queue.get(slot)>=0){
+        queue.remove(slot);
+    }
+    if(serving.get(slot)>=0){
+        serving.remove(slot);
+    }
+    res.send("deleted");
+    // cookie for this slot must be set to expired.
+});
+
+app.post('/accept', function(req,res){
+    slotToAccept = req.header("acceptSlot");
+    let slot = new QueueSlot(getCookie("navn", slotToAccept), getCookie("fag", slotToAccept), getCookie("bord", slotToAccept));
+    if(queue.get(slot)>=0){
+        queue.remove(slot);
+        serving.addQueueSlot(slot);
+    }
+    res.send("accepted");
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -93,13 +148,17 @@ wss.on("connection", function connection(ws) {
     websocketConnections[connection.id]
 
     connection.on("message", function incoming(message) {
-
-
-        if (message === "REQ QUEUE") {
+        if (message === "REQ WAITING QUEUE") {
             // Send queue items to user here
-            console.log("Sending queue items")
-
-            queue.queueArray.forEach(slot => connection.send(JSON.stringify(slot)));
+            console.log("Sending waiting queue items");
+            const queueJSON = "{\"waiting\":" + JSON.stringify(queue.queueArray) + "}";
+            connection.send(queueJSON);
+        }
+        if(message === "REQ SERVING QUEUE"){
+            // Send queue items to user here
+            console.log("Sending serving queue items");
+            const queueJSON = "{\"serving\":" + JSON.stringify(serving.queueArray) + "}";
+            connection.send(queueJSON);
         }
     });
 });

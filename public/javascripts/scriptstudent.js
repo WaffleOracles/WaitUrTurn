@@ -7,10 +7,29 @@ function addToQueue() {
     let bordNummer = document.getElementById('bordField').value;
     socket.send(navn + ", " + fag + ", " + bordNummer);
     console.log("sent message")
-};
+}
+
+function setCookieExpresssion(hours) {
+    var d = new Date();
+    d.setTime(d.getTime() + (Math.floor(hours*60*60*1000)));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = expires + ";path=/";
+}
+
+function storeCookie(){
+    setCookie("navn",document.getElementsByClassName("input").item(0).value);
+    setCookie("fag",document.getElementsByClassName("input").item(1).value);
+    setCookie("bord",document.getElementsByClassName("input").item(2).value);
+    setCookieExpresssion(1);
+}
+
+function setCookie(cname, cvalue) {
+    document.cookie = cname + "=" + cvalue + ";";
+}
 
 
 function mouseOver(id) {
+    storeCookie();
     id.style.backgroundColor =  "#edae49";
     id.style.color ='#d1495b';
 }

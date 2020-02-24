@@ -12,6 +12,7 @@ var app = express();
 var queue = new Queue();
 var serving = new Queue();
 var done = new Queue();
+var deleted = new Queue();
 
 // Add example queue sloits here for testing
 queue.addQueueSlot(new QueueSlot('Vetle', 'Inf140', '7'));
@@ -64,7 +65,7 @@ app.get('/waiting', function (req, res, next) {
     if(date<Date.now()){
         // expired cookie, return start page
         res.render('front');
-    }else if (done.get(slot)>=0){
+    }else if (done.get(slot)>=0 || deleted.get(slot)>=0){
         res.render('front');
     }else if(queue.get(slot)>=0){
         // if in queue
@@ -101,9 +102,11 @@ app.post('/delete', function(req,res){
     let slot = new QueueSlot(getCookie("navn", slotToDelete), getCookie("fag", slotToDelete), getCookie("bord", slotToDelete));
     if(queue.get(slot)>=0){
         queue.remove(slot);
+        deleted.addQueueSlot(slot);
     }
     if(serving.get(slot)>=0){
         serving.remove(slot);
+        deleted.addQueueSlot(slot);
     }
     res.send("deleted");
     // cookie for this slot must be set to expired.

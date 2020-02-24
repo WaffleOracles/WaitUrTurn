@@ -13,3 +13,14 @@ function mouseLeave(id) {
     id.children[0].style.color ='#eeae49';
     id.children[0].style.textShadow ="10px 10px 20px #003d5b";
 }
+
+window.onload = function(){
+    setCookieExpresssion();
+};
+
+function setCookieExpresssion() {
+    var d = new Date();
+    d.setTime(d.getTime());
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = expires + ";path=/";
+}
